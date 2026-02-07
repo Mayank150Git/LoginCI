@@ -7,3 +7,4 @@ def test_TC1(page:Page):
     page.locator("#username").fill("student")
     page.locator("#password").fill("Password123")
     page.locator("#submit").click()
+    assert "Successfully" in page.content()
