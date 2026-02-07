@@ -21,7 +21,7 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
-                bat 'call venv\\Scripts\\activate && pytest -v -s test_login.py --headed'
+                bat 'call venv\\Scripts\\activate && pytest -v -s --headed'
             }
         }
 
