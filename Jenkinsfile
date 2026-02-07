@@ -12,17 +12,17 @@ pipeline {
         stage('Setup Python Environment') {
             steps {
                 // Create virtual environment and install dependencies
-                sh 'python3 -m venv venv'
-                sh '. venv/bin/activate && pip install -r requirements.txt'
+                bat 'python3 -m venv venv'
+                bat '. venv/bin/activate && pip install -r requirements.txt'
                 // Install Playwright browsers
-                sh 'playwright install'
+                bat 'playwright install'
             }
         }
 
         stage('Run Playwright Tests') {
             steps {
                 // Run pytest with Playwright tests
-                sh '. venv/bin/activate && pytest --junitxml=results.xml'
+                bat '. venv/bin/activate && pytest --junitxml=results.xml'
             }
         }
 
@@ -39,11 +39,11 @@ pipeline {
             // Archive test results for future reference
             archiveArtifacts artifacts: 'results.xml', fingerprint: true
         }
-        failure {
-            // Notify team if build fails
-            mail to: 'mayanktripathi150@gmail.com',
-                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Check Jenkins for details."
-        }
+//         failure {
+//             // Notify team if build fails
+//             mail to: 'mayanktripathi150@gmail.com',
+//                  subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+//                  body: "Check Jenkins for details."
+//         }
     }
 }
