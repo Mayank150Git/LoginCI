@@ -12,7 +12,7 @@ pipeline {
         stage('Setup Python Environment') {
             steps {
                 // Create virtual environment and install dependencies
-                bat 'python3 -m venv venv'
+                bat 'python -m venv venv'
                 bat '. venv/bin/activate && pip install -r requirements.txt'
                 // Install Playwright browsers
                 bat 'playwright install'
